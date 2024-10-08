@@ -18,7 +18,7 @@ garment_hd = os.path.join(example_path, 'garment/03244_00.jpg')
 model_dc = os.path.join(example_path, 'model/model_8.png')
 garment_dc = os.path.join(example_path, 'garment/048554_1.jpg')
 
-client = Client("jsoncm/OOTDiffusion", hf_token="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")
+#client = Client("jsoncm/OOTDiffusion", hf_token="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")
 
 def process_images(result):
     processed_images = []
@@ -62,16 +62,17 @@ def process_hd(vton_img, garm_img, n_samples, n_steps, image_scale, seed):
     print(f"发送到 API 的参数: vton_img={vton_img}, garm_img={garm_img}, n_samples={n_samples}, n_steps={n_steps}, image_scale={image_scale}, seed={seed}")
     category = 0 # 0:upperbody; 1:lowerbody; 2:dress
     def _process():
-        result = client.predict(
-            vton_img=handle_file(vton_img),
-            garm_img=handle_file(garm_img),
-            n_samples=n_samples,
-            n_steps=n_steps,
-            category=category_dict[category],
-            image_scale=image_scale,
-            seed=seed,
-            api_name="/process_hd"
-        )
+        result='123'
+        #result = client.predict(
+        #    vton_img=handle_file(vton_img),
+        #    garm_img=handle_file(garm_img),
+        #    n_samples=n_samples,
+        #    n_steps=n_steps,
+        #    category=category_dict[category],
+        #    image_scale=image_scale,
+        #    seed=seed,
+        #    api_name="/process_hd"
+        #)
         print("API返回结果 (HD):", result)
         return process_images(result) if result else None
 
@@ -89,17 +90,18 @@ def process_dc(vton_img, garm_img, category, n_samples, n_steps, image_scale, se
     else:
         category =2
     def _process():
-        result = client.predict(
-            vton_img=handle_file(vton_img),
-            garm_img=handle_file(garm_img),
-            n_samples=n_samples,
-            n_steps=n_steps,
-            category=category_dict[category],
-            image_scale=image_scale,
-            seed=seed,
-            api_name="/process_dc"
-        )
-        print("API返回结果 (DC):", result)
+        result='456'
+        #result = client.predict(
+        #    vton_img=handle_file(vton_img),
+        #    garm_img=handle_file(garm_img),
+        #    n_samples=n_samples,
+        #    n_steps=n_steps,
+        #    category=category_dict[category],
+        #    image_scale=image_scale,
+        #    seed=seed,
+        #    api_name="/process_dc"
+        #)
+        #print("API返回结果 (DC):", result)
         return process_images(result) if result else None
 
     result = process_with_retry(_process)
@@ -197,4 +199,4 @@ with block:
     ips_dc = [vton_img_dc, garm_img_dc, category_dc, n_samples_dc, n_steps_dc, image_scale_dc, seed_dc]
     run_button_dc.click(fn=process_dc, inputs=ips_dc, outputs=[result_gallery_dc])
 
-block.launch(show_error=True)
+block.launch(root_path="/ootd", show_error=True)
