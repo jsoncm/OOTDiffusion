@@ -39,7 +39,7 @@ def webhook():
 
                         # 重启 streamlit 服务
                         restart_result = subprocess.run(['supervisorctl', 'restart', 'gradio_ootd'], capture_output=True, text=True)
-                        print(restart_result.stdout)  # 输出重启的结果
+                        print(restart_result.stdout)  # 输出重启的结果 
 
                         print("Deployment completed successfully.")
                         return 'Deployment completed successfully', 200
