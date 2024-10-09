@@ -38,7 +38,7 @@ def webhook():
                         print(pull_result.stdout)  # 输出 git pull 的结果
 
                         # 重启 streamlit 服务
-                        restart_result = subprocess.run(['supervisorctl', 'restart', 'flask_webhook_ootd'], capture_output=True, text=True)
+                        restart_result = subprocess.run(['supervisorctl', 'restart', 'gradio_ootd'], capture_output=True, text=True)
                         print(restart_result.stdout)  # 输出重启的结果
 
                         print("Deployment completed successfully.")
@@ -58,5 +58,5 @@ def webhook():
         print(f"Error: {e}")
         return 'Internal Server Error', 500
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=7860, debug=True)
+#if __name__ == '__main__':
+#    app.run(host='0.0.0.0', port=5001, debug=True)
